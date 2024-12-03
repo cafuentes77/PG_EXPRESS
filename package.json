@@ -1,11 +1,11 @@
 {
-  "name": "pg_express",
+  "name": "pg-express",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon .src/main.js"
+    "dev": "nodemon ./src/main.js"
   },
   "keywords": [],
   "author": "",
