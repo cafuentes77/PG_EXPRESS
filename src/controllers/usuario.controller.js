@@ -71,3 +71,43 @@ export const updateById = async (req, res) => {
         });
     }
 }
+
+export const permaDeleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const dataDeleted = await Usuario.permaDelete(id);
+
+        res.status(200).json({
+            message: 'Usuario eliminado con éxito',
+            status: 200,
+            data: dataDeleted
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al eliminar al usuario",
+            status: 500,
+            error
+        });
+    }
+}
+
+export const softDeleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userDeleted = await Usuario.softDelete(id);
+
+        res.status(200).json({
+            message: 'Usuario eliminado con éxito',
+            status: 200,
+            data: userDeleted
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al eliminar al usuario",
+            status: 500,
+            error
+        });
+    }
+}

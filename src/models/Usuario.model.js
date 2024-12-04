@@ -91,5 +91,31 @@ export class Usuario {
         }
     }
 
+    static async permaDelete (id) {
+        try {
+            const deleteQuery = `DELETE FROM usuarios WHERE id = $1 AND active = true `;
+            const value = [id]
+            await query(deleteQuery, value)
+
+        } catch (error) {
+            console.error(`Error al eliminar el usuario por id. ERROR: ${error.message}`)
+            throw new Error(`Error al eliminar el usuario por id ${error}`)
+        }
+    }
+
+    static async softDelete (id) {
+        try {
+            const softDeleteQuery = `UPDATE usuarios SET active = false WHERE id = $1 AND active = true `
+            const value = [id]
+
+            const { rows } = await query(softDeleteQuery, value)
+            if(rows.length === 0 )
+                throw new Error('No se pudo eliminar el usuario')
+            return rows[0]
+        } catch (error) {
+            console.error(`Error al eliminar el usuario por id. ERROR: ${error.message}`)
+            throw new Error(`Error al eliminar el usuario por id ${error}`)
+        }
+    }
 
 }
