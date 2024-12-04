@@ -1,6 +1,6 @@
 import { Usuario } from "../models/Usuario.model.js"
 
-export const createUser = async(req, res) => {
+export const createUser = async (req, res) => {
     try {
         const user = await Usuario.create(req.body);
 
@@ -17,7 +17,7 @@ export const createUser = async(req, res) => {
     }
 }
 
-export const findAll = async(req, res) => {
+export const findAll = async (req, res) => {
     try {
         const users = await Usuario.findAllActive()
         res.status(200).json({
@@ -33,7 +33,7 @@ export const findAll = async(req, res) => {
     }
 }
 
-export const findById = async(req, res) => {
+export const findById = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -46,10 +46,28 @@ export const findById = async(req, res) => {
             data: user
         })
     } catch (error) {
-         res.status(500).json({
-           message: "Error al encontrar al usuarios",
-           status: 500,
-           error
-         });
+        res.status(500).json({
+            message: "Error al encontrar al usuarios",
+            status: 500,
+            error
+        });
+    }
+}
+
+export const updateById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = req.body;
+        res.status(200).json({
+            message: 'Usuario actualizado con éxito',
+            status: 200,
+            data: userupdated
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al actualizar al usuarios",
+            status: 500,
+            error
+        });
     }
 }

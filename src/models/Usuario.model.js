@@ -62,4 +62,34 @@ export class Usuario {
             throw new Error(`Error al buscar un usuario por id ${error}`)
         }
     }
+
+    static async update(id, data) {
+        try {
+            const { name, lastname, email, birthday, phone, budget } = data;
+            const updateQuery = `
+            UPDATE usuarios 
+            SET name = $1, 
+            lastname =$2, 
+            email = $3, 
+            birthday = $4,
+            phone = $5, 
+            budget = $6 
+            WHERE id = $7 AND active = true
+            RETURNING *;
+            `
+            const values = [name, lastname, email, birthday, phone, budget, id]
+
+            const { rows } = await query(updateQuery, values)
+
+            if(rows.length === 0 ) 
+                throw new Error('No pudimos actualizar el usuario')
+            return rows[0]
+
+        } catch (error) {
+            console.error(`Error al actualizar el usuario. ERROR: ${error.message}`)
+            throw new Error(`Error al actualizar el usuario ${error}`)
+        }
+    }
+
+
 }
