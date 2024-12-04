@@ -8,7 +8,7 @@ export class Usuario {
         this.lastname = lastname;
         this.email = email;
         this.phone = phone;
-        this.birthdate = birthdate;
+        this.birthday = birthday;
         this.budget = budget;
         this.active = true
     }
